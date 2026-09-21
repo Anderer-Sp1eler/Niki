@@ -1,0 +1,28 @@
+{
+  "character": "Cute Sheep enemy for Wolfy Jump'n'Run",
+  "frameSize": {
+    "width": 128,
+    "height": 128
+  },
+  "background": "transparent RGBA",
+  "anchor": {
+    "x": 64,
+    "groundY": 120
+  },
+  "animations": {
+    "idle": 6,
+    "walk": 6,
+    "run": 8,
+    "jump": 4,
+    "fall": 4,
+    "land": 4,
+    "hurt": 4,
+    "death": 6
+  },
+  "notes": [
+    "Each PNG is exactly 128x128 pixels.",
+    "Each frame is individually positioned using a common body anchor.",
+    "The sheep is scaled with one consistent global scale factor derived from the idle body height.",
+    "Background pixels are transparent; no checkerboard is stored in the PNGs."
+  ]
+}
