@@ -31,7 +31,7 @@ const framePaths = (
   Array.from(
     { length: count },
     (_, i) =>
-      `/assets/images/player/frames/${animation}/${String(i).padStart(2, "0")}.png`
+      `${import.meta.env.BASE_URL}assets/images/player/frames/${animation}/${String(i).padStart(2, "0")}.png`
   );
 
 export const PLAYER_ANIMATIONS: Record<
