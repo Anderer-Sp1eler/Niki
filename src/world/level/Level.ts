@@ -1,5 +1,6 @@
 import { GameConfig } from "../../core/config/GameConfig";
 import { Sheep } from "../../entities/Sheep";
+import { Bear } from "../../entities/Bear";
 
 export interface Platform {
   x: number;
@@ -29,5 +30,10 @@ export class Level {
   // Erstes Gegner-Exemplar: patrouilliert auf dem Boden zwischen x=600 und x=900.
   readonly sheep: Sheep[] = [
     new Sheep(720, 500, 600, 900)
+  ];
+
+  // Zweites Gegner-Exemplar: langsam und schwerfällig auf dem Boden.
+  readonly bears: Bear[] = [
+    new Bear(2200, 500, 1950, 2350)
   ];
 }
