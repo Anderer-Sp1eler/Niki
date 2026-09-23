@@ -106,18 +106,56 @@ export class Player {
       this.animationTime += dt;
       this.landTimer -= dt;
 
-      // Während der Landung bremsen wir Wolfy etwas ab.
-      this.vx = moveTowards(
-        this.vx,
+      /*
+       * LAND:
+       * Wolfy behält beim Aufkommen seinen horizontalen Schwung.
+       * Wird die Richtungstaste weiter gedrückt, läuft die normale
+       * Bodenbeschleunigung während der Land-Animation weiter.
+       * Ohne Richtungstaste wird der Schwung sanft abgebaut.
+       *
+       * Dadurch gibt es beim Aufkommen keinen künstlichen Stillstand.
+       */
+      const direction =
+        (input.right ? 1 : 0) -
+        (input.left ? 1 : 0);
+
+      if (direction !== 0) {
+        this.facing = direction > 0 ? "right" : "left";
+
+        this.vx = moveTowards(
+          this.vx,
+          direction * GameConfig.physics.moveSpeed,
+          GameConfig.physics.acceleration * dt
+        );
+      } else {
+        this.vx = moveTowards(
+          this.vx,
+          0,
+          GameConfig.physics.friction * dt
+        );
+      }
+
+      // Auch während der Land-Animation horizontal weiterbewegen.
+      this.x += this.vx * dt;
+      this.collision.resolveHorizontal(
+        this,
+        level.platforms
+      );
+
+      this.x = Math.max(
         0,
-        GameConfig.physics.friction * dt
+        Math.min(
+          this.x,
+          level.width - this.width
+        )
       );
 
       if (this.landTimer <= 0) {
         this.updateMovementStateAfterSpecialState();
       }
 
-      // Landen soll nicht von der normalen Jump/Fall-Logik überschrieben werden.
+      // Die Land-Animation darf nicht von der normalen
+      // Jump/Fall-Logik überschrieben werden.
       return;
     }
 
