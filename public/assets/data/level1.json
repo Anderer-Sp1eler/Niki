@@ -1,0 +1,17 @@
+{
+  "name": "Level 1",
+  "width": 3200,
+  "height": 600,
+  "spawn": { "x": 120, "y": 300 },
+  "platforms": [
+    { "x": 0, "y": 500, "width": 3200, "height": 100 },
+    { "x": 300, "y": 410, "width": 180, "height": 24 },
+    { "x": 620, "y": 350, "width": 190, "height": 24 },
+    { "x": 960, "y": 290, "width": 180, "height": 24, "oneWay": true },
+    { "x": 1300, "y": 390, "width": 220, "height": 24 },
+    { "x": 1700, "y": 320, "width": 180, "height": 24, "oneWay": true },
+    { "x": 2050, "y": 250, "width": 180, "height": 24 },
+    { "x": 2450, "y": 370, "width": 220, "height": 24 },
+    { "x": 2850, "y": 300, "width": 180, "height": 24, "oneWay": true }
+  ]
+}

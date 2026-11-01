@@ -1,0 +1,25 @@
+{
+  "frameSize": [
+    128,
+    128
+  ],
+  "animations": {
+    "idle": 6,
+    "run": 8,
+    "jump": 4,
+    "fall": 4,
+    "land": 4,
+    "attack": 4,
+    "hurt": 4,
+    "death": 4
+  },
+  "anchor": {
+    "centerX": 64,
+    "baselineY": 128
+  },
+  "rendererDrawSize": [
+    96,
+    96
+  ],
+  "implementation": "individual frame PNGs are used by SpriteSheet.ts"
+}
