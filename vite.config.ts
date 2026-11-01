@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-//    base: "/Niki/",
+//    base: "/Niki/",      (gelöscht, weil Pfad online Probleme macht)
 });
