@@ -3,19 +3,38 @@ import type { Platform } from "../level/Level";
 import type { Player } from "../../entities/Player";
 
 export class CollisionSystem {
-  resolveHorizontal(player: Player, platforms: readonly Platform[]): void {
+  resolveHorizontal(
+    player: Player,
+    platforms: readonly Platform[],
+    previousX: number
+  ): void {
+    const previousRight = previousX + player.width;
+    const currentRight = player.x + player.width;
+
     for (const platform of platforms) {
-      if (
-        player.x < platform.x + platform.width &&
-        player.x + player.width > platform.x &&
+      const verticalOverlap =
         player.y < platform.y + platform.height &&
-        player.y + player.height > platform.y
-      ) {
-        if (player.vx > 0) {
-          player.x = platform.x - player.width;
-        } else if (player.vx < 0) {
-          player.x = platform.x + platform.width;
-        }
+        player.y + player.height > platform.y;
+
+      if (!verticalOverlap) continue;
+
+      // Nur eine tatsächlich durchlaufene Seitenkante auflösen.
+      // Eine bloße Überlappung (z. B. nach einem Deckenkontakt) darf
+      // Wolfy nicht seitlich zurücksetzen.
+      const crossedFromLeft =
+        player.x > previousX &&
+        previousRight <= platform.x + 1 &&
+        currentRight > platform.x;
+      const crossedFromRight =
+        player.x < previousX &&
+        previousX >= platform.x + platform.width - 1 &&
+        player.x < platform.x + platform.width;
+
+      if (crossedFromLeft) {
+        player.x = platform.x - player.width;
+        player.vx = 0;
+      } else if (crossedFromRight) {
+        player.x = platform.x + platform.width;
         player.vx = 0;
       }
     }

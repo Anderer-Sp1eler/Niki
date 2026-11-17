@@ -46,12 +46,21 @@ export class Renderer {
     c.translate(-this.camera.x, 0);
 
     for (const platform of level.platforms) {
-      c.fillStyle = platform.oneWay ? "#9b6b43" : "#5b8f3a";
+      c.fillStyle = platform.moving
+        ? "#a96f45"
+        : platform.oneWay ? "#9b6b43" : "#5b8f3a";
       c.fillRect(platform.x, platform.y, platform.width, platform.height);
 
       if (platform.oneWay) {
-        c.fillStyle = "#c99a67";
+        c.fillStyle = platform.moving ? "#e2b477" : "#c99a67";
         c.fillRect(platform.x, platform.y, platform.width, 5);
+      }
+
+      // Kleine Markierungen machen bewegliche Plattformen erkennbar.
+      if (platform.moving) {
+        c.fillStyle = "#70452f";
+        c.fillRect(platform.x + 12, platform.y + 10, 8, 4);
+        c.fillRect(platform.x + platform.width - 20, platform.y + 10, 8, 4);
       }
     }
 

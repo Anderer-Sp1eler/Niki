@@ -80,8 +80,9 @@ export class Player {
 
       const previousBottom = this.y + this.height;
 
+      const previousX = this.x;
       this.x += this.vx * dt;
-      this.collision.resolveHorizontal(this, level.platforms);
+      this.collision.resolveHorizontal(this, level.platforms, previousX);
 
       this.y += this.vy * dt;
       this.collision.resolveVertical(
@@ -136,10 +137,12 @@ export class Player {
       }
 
       // Auch während der Land-Animation horizontal weiterbewegen.
+      const previousX = this.x;
       this.x += this.vx * dt;
       this.collision.resolveHorizontal(
         this,
-        level.platforms
+        level.platforms,
+        previousX
       );
 
       this.x = Math.max(
@@ -223,10 +226,12 @@ export class Player {
     );
 
     // Horizontale Bewegung
+    const previousX = this.x;
     this.x += this.vx * dt;
     this.collision.resolveHorizontal(
       this,
-      level.platforms
+      level.platforms,
+      previousX
     );
 
     // Vertikale Bewegung

@@ -31,6 +31,8 @@ export class Game {
     );
 
     this.input.update();
+    // Plattformen zuerst bewegen, damit Wolfy bei Bedarf mitgenommen wird.
+    this.level.update(dt, this.player);
     this.player.update(dt, this.input, this.level);
     for (const sheep of this.level.sheep) {
       sheep.update(dt);
